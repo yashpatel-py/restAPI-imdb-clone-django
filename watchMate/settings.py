@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'watchlist_app',
+    'watchlist_app', # App created by me
+    'rest_framework', # RestAPI Framework
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
