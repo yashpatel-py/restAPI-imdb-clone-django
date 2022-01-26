@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
+# NOTE: Movie List view
 class WatchListAV(APIView):
     def get(self, request):
         movies = WatchList.objects.all()
@@ -18,6 +19,7 @@ class WatchListAV(APIView):
         else:
             return Response(serializer.errors)
 
+# NOTE: Movie details view
 class WatchDetailAV(APIView):
     def get(self, request, pk):
         try:
@@ -41,6 +43,7 @@ class WatchDetailAV(APIView):
         movies.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+#  NOTE: Stream platform list view
 class StreamPlatformAV(APIView):
     def get(self, request):
         platform = StreamPlatform.objects.all()
@@ -55,6 +58,7 @@ class StreamPlatformAV(APIView):
         else:
             return Response(serializer.errors)
 
+# NOTE: Stream Platform Detail View
 class StreamPlatformDetailAV(APIView):
     def get(self, request, pk):
         try:
