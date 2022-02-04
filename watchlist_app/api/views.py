@@ -65,31 +65,19 @@ class WatchDetailAV(APIView):
         movies.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class streamPlatformVS(viewsets.ViewSet):
-    def list(self, request):
-        queryset = StreamPlatform.objects.all()
-        serialiser = StreamPlatformSerializer(queryset, many=True, context={'request': request})
-        return Response(serialiser.data)
+# class streamPlatformVS(viewsets.ModelViewSet):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
-    def retrieve(self, request, pk=None):
-        queryset = StreamPlatform.objects.all()
-        watchlist = get_object_or_404(queryset, pk=pk)
-        serializer = StreamPlatformSerializer(watchlist, context={'request': request})
-        return Response(serializer.data)
-    
-    def create(self, request):
-        serializer = StreamPlatformSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(serializer.errors)
+class streamPlatformVS(viewsets.ReadOnlyModelViewSet):
+    queryset = StreamPlatform.objects.all()
+    serializer_class = StreamPlatformSerializer
 
 # #  NOTE: Stream platform list view
 class StreamPlatformAV(APIView):
     def get(self, request):
         platform = StreamPlatform.objects.all()
-        serializer = StreamPlatformSerializer(platform, many = True, context={'request': request})
+        serializer = StreamPlatformSerializer(platform, many = True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -107,7 +95,7 @@ class StreamPlatformDetailAV(APIView):
             streamPlatform_single_data = StreamPlatform.objects.get(pk=pk)
         except StreamPlatform.DoesNotExist:
             return Response({"Error": "StreamPlatform not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = StreamPlatformSerializer(streamPlatform_single_data, context={'request': request})
+        serializer = StreamPlatformSerializer(streamPlatform_single_data)
         return Response(serializer.data)
 
     def put(self, request, pk):
