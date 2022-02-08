@@ -11,6 +11,10 @@ from rest_framework.response import Response
 from rest_framework import status, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
+'''
+Custom permissions imports
+'''
+from watchlist_app.api.permissions import AdminOrReadOnly, ReviewUserOrReadOnly
 
 
 class ReviewList(generics.ListAPIView):
@@ -22,7 +26,7 @@ class ReviewList(generics.ListAPIView):
         return Review.objects.filter(watchlist=pk)
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [ReviewUserOrReadOnly]
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
