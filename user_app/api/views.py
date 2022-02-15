@@ -3,7 +3,13 @@ from .serializers import ResgistrationSerializer
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from user_app import models
+from rest_framework import status
 
+@api_view(['POST',])
+def logOut_view(request):
+    if request.method == "POST":
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
 
 @api_view(['POST',])
 def registration_view(request):
