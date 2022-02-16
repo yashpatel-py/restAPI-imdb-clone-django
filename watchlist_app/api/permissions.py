@@ -16,14 +16,6 @@ class IsReviewUserOrReadOnly(permissions.BasePermission):
     '''
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
-            '''
-                This will check permissions for readonly request
-            '''
             return True
         else:
-            '''
-            Else it will check permissions for write request
-
-            -->  else part will compare the review user and loggedin user and if both are equal then it will give permission to PUT, DELETE
-            '''
-            return obj.review_user == request.user
+            return obj.review_user == request.user or request.user.is_staff

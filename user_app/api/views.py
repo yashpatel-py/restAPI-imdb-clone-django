@@ -9,7 +9,7 @@ from rest_framework import status
 def logOut_view(request):
     if request.method == "POST":
         request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        return Response({'Success': 'You are logged out and your token has been deleted'},status=status.HTTP_200_OK)
 
 @api_view(['POST',])
 def registration_view(request):

@@ -111,7 +111,7 @@ class StreamPlatformAV(APIView):
     permission_classes = [IsAdminOrReadOnly]
     def get(self, request):
         platform = StreamPlatform.objects.all()
-        serializer = StreamPlatformSerializer(platform, many = True)
+        serializer = StreamPlatformSerializer(platform, many = True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
