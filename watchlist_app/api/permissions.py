@@ -1,16 +1,14 @@
 from tkinter.tix import Tree
 from rest_framework import permissions
 
-class AdminOrReadOnly(permissions.IsAdminUser):
+class IsAdminOrReadOnly(permissions.IsAdminUser):
     def has_permission(self, request, view):
-        '''
-        If we don't add request.method == "GET" then admin can only see the data and edit the data
-        AND
-        If we add request.method == "GET" the any user can see the data but can't edit the data only admin can edit
-        '''
-        return request.method == "GET" or bool(request.user and request.user.is_staff)
+        if request.method in permissions.SAFE_METHODS: # If not admin then show only data
+            return True
+        else:
+            return bool(request.user and request.user.is_staff) # If admin then allow to edit ot delete data
 
-class ReviewUserOrReadOnly(permissions.BasePermission):
+class IsReviewUserOrReadOnly(permissions.BasePermission):
     '''
     This class is made for the review_creater
     
