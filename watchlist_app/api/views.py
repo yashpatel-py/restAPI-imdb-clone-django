@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 '''
 Custom permissions imports
 '''
@@ -19,6 +20,7 @@ from watchlist_app.api.permissions import IsAdminOrReadOnly, IsReviewUserOrReadO
 class ReviewList(generics.ListAPIView):
     serializer_class = ReviewSerializer
     # permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get_queryset(self):
         pk = self.kwargs['pk']
@@ -28,6 +30,7 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsReviewUserOrReadOnly]
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
