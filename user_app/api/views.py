@@ -10,7 +10,7 @@ from rest_framework import status
 '''
 Simple JWT imports
 '''
-from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import RefreshToken
 
 @api_view(['POST',])
 def logOut_view(request):
@@ -32,14 +32,14 @@ def registration_view(request):
             data['username'] = account.username
             data['email'] = account.email
 
-            # token = Token.objects.get(user=account).key
-            # data['token'] = token
+            token = Token.objects.get(user=account).key
+            data['token'] = token
 
-            refresh = RefreshToken.for_user(account)
-            data['token'] = {
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            }
+            # refresh = RefreshToken.for_user(account)
+            # data['token'] = {
+            #     'refresh': str(refresh),
+            #     'access': str(refresh.access_token),
+            # }
         else:
             data = serializer.errors
         return Response(data)
