@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
-from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
 '''
 Custom permissions imports
 '''
@@ -31,7 +31,8 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsReviewUserOrReadOnly]
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'review-detail'
 
 class ReviewCreate(generics.CreateAPIView):
     serializer_class = ReviewSerializer
