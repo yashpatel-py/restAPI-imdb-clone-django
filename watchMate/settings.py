@@ -142,7 +142,9 @@ REST_FRAMEWORK = {
         'review-create': '1/day',
         'review-list': '10/day',
         'review-detail': '3/day'
-    }
+    },
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2
 }
 
 SIMPLE_JWT = {
