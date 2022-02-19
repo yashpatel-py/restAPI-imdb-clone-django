@@ -9,7 +9,7 @@ rest framework related imports
 '''
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework import status, generics, viewsets
+from rest_framework import status, generics, viewsets, filters
 from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle, ScopedRateThrottle
@@ -56,8 +56,8 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 class WatchLists(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['title', 'platform__name']
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'platform__name']
 # --------------------------------------------
 
 class ReviewCreate(generics.CreateAPIView):
