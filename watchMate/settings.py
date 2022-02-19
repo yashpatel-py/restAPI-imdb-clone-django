@@ -34,7 +34,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'watchlist_app', # App created by me
     'rest_framework', # RestAPI Framework
-    'rest_framework.authtoken',
+    'rest_framework.authtoken', # 
+    'django_filters', # This packages is only used in generic views only
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
