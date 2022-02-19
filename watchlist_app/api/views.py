@@ -53,7 +53,7 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'review-detail'
 # --------------------------------------------
-class WatchLists(generics.ListAPIView):
+class WatchListGV(generics.ListAPIView):
     queryset = WatchList.objects.all()
     serializer_class = WatchListSerializer
     # filter_backends = [filters.SearchFilter]
