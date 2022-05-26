@@ -1,5 +1,7 @@
 # ***Watch Mate***
 
+[Hosted on heroku](https://imdb-restapi-django.herokuapp.com/)
+
 I ma creating this project and learning the `django rest framework`
 
 [![Youtube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCKspdO30Fea8ZCxwg-0svOg)
