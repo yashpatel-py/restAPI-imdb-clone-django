@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from rest_framework import permissions
 
 class IsAdminOrReadOnly(permissions.IsAdminUser):
