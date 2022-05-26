@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n!yk0n$yzk8jvlh36z=%!_^7^_t_+f1bx2ivp4s0#%a467yp2v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['watchmate-imdb.herokuapp.com']
 
